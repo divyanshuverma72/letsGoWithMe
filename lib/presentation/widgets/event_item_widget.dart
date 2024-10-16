@@ -10,10 +10,11 @@ import '../../data/repositories/trip_engagement_repo.dart';
 
 class EventItemWidget extends StatefulWidget {
   const EventItemWidget(
-      {super.key, required this.trip, required this.isPastEvent});
+      {super.key, required this.trip, required this.isPastEvent, this.onDeleteEvent});
 
   final TripInfo trip;
   final bool isPastEvent;
+  final void Function(String tripId)? onDeleteEvent;
 
   @override
   State<EventItemWidget> createState() => _EventItemWidgetState();
@@ -70,6 +71,26 @@ class _EventItemWidgetState extends State<EventItemWidget> {
             ),
           ),
         ),
+        widget.trip.userId == UserPreferences.userid ? Positioned(
+          top: 0.1,
+          right: 0.1,
+          child: PopupMenuButton(
+              // add icon, by default "3 dot" icon
+              // icon: Icon(Icons.book)
+              itemBuilder: (context) {
+            return [
+              const PopupMenuItem<int>(
+                height: 10,
+                value: 0,
+                child: Text("Delete"),
+              ),
+            ];
+          }, onSelected: (value) {
+            if (value == 0) {
+              widget.onDeleteEvent!(widget.trip.uuid);
+            }
+          }),
+        ): const SizedBox(),
         Positioned(
           top: 8,
           left: 8,

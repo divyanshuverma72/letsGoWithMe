@@ -15,5 +15,9 @@ String userLikesUrl = "$rootUrl/trip/post/engagement/like/";
 String tripJoinersUrl = "$rootUrl/trip/post/engagement/join/";
 String toggleLikesUrl = "$rootUrl/trip/post/react";
 String createEvent = "$rootUrl/trip/create";
+String deleteEventUrl = "$rootUrl/delete/trip";
+String deleteAccountUrl = "$rootUrl/delete/user";
+String privacyPolicyUrl = "$rootUrl/home/privacypolicies";
+String tncUrl = "$rootUrl/home/termsandconditions";
 
 

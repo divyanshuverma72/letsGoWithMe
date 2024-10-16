@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:lets_go_with_me/data/dataproviders/create_event_service.dart';
+import 'package:lets_go_with_me/data/dataproviders/delete_account_service.dart';
 import 'package:lets_go_with_me/data/dataproviders/fetch_trip_joiners_service.dart';
 import 'package:lets_go_with_me/data/dataproviders/profile_service.dart';
 import 'package:lets_go_with_me/data/dataproviders/events_service.dart';
@@ -13,6 +14,7 @@ import 'package:lets_go_with_me/data/dataproviders/trip_engagement_service.dart'
 import 'package:lets_go_with_me/data/dataproviders/user_details_service.dart';
 import 'package:lets_go_with_me/data/repositories/create_event_repo.dart';
 import 'package:lets_go_with_me/data/repositories/create_profile_repo.dart';
+import 'package:lets_go_with_me/data/repositories/delete_account_repo.dart';
 import 'package:lets_go_with_me/data/repositories/events_repo.dart';
 import 'package:lets_go_with_me/data/repositories/auth_repo.dart';
 import 'package:lets_go_with_me/data/repositories/post_comments_repo.dart';
@@ -57,6 +59,9 @@ Future<void> setupLocator() async {
 
   locator.registerFactory<TripEngagementRepo>(() => TripEngagementRepoImpl(tripEngagementService: locator()));
   locator.registerFactory<TripEngagementService>(() => TripEngagementServiceImpl(httpClient: locator()));
+
+  locator.registerFactory<DeleteAccountRepo>(() => DeleteAccountRepoImpl(deleteAccountService: locator()));
+  locator.registerFactory<DeleteAccountService>(() => DeleteAccountServiceImpl(httpClient: locator()));
 
   locator.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(locator()));
   locator.registerFactory(() => Connectivity());

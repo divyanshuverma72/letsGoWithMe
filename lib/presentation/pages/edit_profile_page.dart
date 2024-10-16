@@ -236,9 +236,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   padding: const EdgeInsets.only(top: 8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(
-                          width: 155,
+                          width: MediaQuery.of(context).size.width / 3,
                           child: TextFormFieldWidget(
                             inputFormatters: const [],
                             hintText: "First Name",
@@ -252,7 +253,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             },
                           )),
                       SizedBox(
-                          width: 155,
+                          width: MediaQuery.of(context).size.width / 3,
                           child: TextFormFieldWidget(
                             inputFormatters: const [],
                             hintText: "Last Name",
@@ -385,7 +386,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         });
                       },
                     ),
-                    const Text("Transgender"),
+                    const Expanded(child: Text("Transgender")),
                   ],
                 ),
                 Padding(

@@ -10,6 +10,8 @@ class SaveProfileDetailsException implements Exception {}
 
 class EventsException implements Exception {}
 
+class DeleteEventException implements Exception {}
+
 class CreateEventException implements Exception {}
 
 class UsernameVerificationException implements Exception {}
@@ -27,3 +29,5 @@ class TripEngagementException implements Exception {}
 class UserDetailsException implements Exception {}
 
 class EditProfileImageException implements Exception {}
+
+class DeleteAccountException implements Exception {}

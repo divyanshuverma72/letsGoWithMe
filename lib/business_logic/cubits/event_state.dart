@@ -21,3 +21,15 @@ class FetchEventsError extends EventState {
 
   FetchEventsError({required this.message}) :super([message]);
 }
+
+class DeleteEventSuccess extends EventState {
+  final DeleteEventResponseModel deleteEventResponseModel;
+
+  DeleteEventSuccess({required this.deleteEventResponseModel}) :super([deleteEventResponseModel]);
+}
+
+class DeleteEventError extends EventState {
+  final String message;
+
+  DeleteEventError({required this.message}) :super([message]);
+}

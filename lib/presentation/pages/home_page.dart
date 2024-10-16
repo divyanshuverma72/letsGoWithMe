@@ -7,6 +7,7 @@ import 'package:lets_go_with_me/data/repositories/events_repo.dart';
 import 'package:lets_go_with_me/presentation/pages/profile_page.dart';
 import '../../business_logic/cubits/event_cubit.dart';
 import '../screens/EventScreen.dart';
+import 'create_event_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -147,10 +148,12 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: const Color(0xFF1D3075),
           tooltip: 'Create a new event',
           onPressed: () {
-            Navigator.pushNamed(
+            Navigator.push( context, MaterialPageRoute( builder: (context) => const CreateEventPage()), ).then((value) => setState(() {
+            }));
+            /*Navigator.pushNamed(
               context,
               '/createEvent',
-            );
+            );*/
           },
           child: const Icon(Icons.add),
         ),

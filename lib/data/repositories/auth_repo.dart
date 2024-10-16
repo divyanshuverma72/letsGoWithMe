@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:lets_go_with_me/core/error/exceptions.dart';
-import 'package:lets_go_with_me/data/models/user_details_model.dart';
 import '../../core/error/failures.dart';
 import '../dataproviders/auth_service.dart';
 import '../models/otp_request_response_model.dart';

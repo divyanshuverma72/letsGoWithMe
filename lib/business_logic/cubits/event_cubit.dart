@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:lets_go_with_me/data/models/delete_event_response_model.dart';
 import 'package:lets_go_with_me/data/models/events_model.dart';
 import 'package:meta/meta.dart';
 
@@ -28,6 +29,24 @@ class EventCubit extends Cubit<EventState> {
       return FetchEventsError(message: "Something went wrong. Please try again");
     }, (eventsModel) {
       return FetchEventsSuccess(eventsModel: eventsModel);
+    }));
+  }
+
+  Future<void> deleteEvent(String tripId) async {
+
+    final internetAvailable = await networkInfo.isConnected;
+    if (!internetAvailable) {
+      emit(FetchEventsError(message: "No active internet connection."));
+      return;
+    }
+
+    emit(FetchEventsInProgress());
+    final failureOrDeleteEventModel = await eventRepo.deleteEvent(tripId);
+
+    emit(failureOrDeleteEventModel.fold((failure) {
+      return DeleteEventError(message: "Could not delete the event, please try again.");
+    }, (deleteEventResponse) {
+      return DeleteEventSuccess(deleteEventResponseModel: deleteEventResponse);
     }));
   }
 }

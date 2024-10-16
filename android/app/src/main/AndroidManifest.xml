@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="lets_go_with_me"
+        android:label="Let's go with me"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

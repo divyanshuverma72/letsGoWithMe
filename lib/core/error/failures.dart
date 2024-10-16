@@ -11,6 +11,8 @@ class UploadProfilePicFailure extends Failure {}
 
 class FetchEventsFailure extends Failure {}
 
+class DeleteEventFailure extends Failure {}
+
 class SaveProfileDetailsFailure extends Failure {}
 
 class EditProfileImageFailure extends Failure {}
@@ -26,3 +28,5 @@ class PostCommentsFailure extends Failure {}
 class TripEngagementFailure extends Failure {}
 
 class UserDetailsFailure extends Failure {}
+
+class DeleteAccountFailure extends Failure {}

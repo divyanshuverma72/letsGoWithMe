@@ -10,7 +10,11 @@ import '../../data/repositories/trip_engagement_repo.dart';
 import '../widgets/event_item_widget.dart';
 
 class EventScreen extends StatefulWidget {
-  const EventScreen(this.curLocation, {super.key, required this.isPastEvent, this.trip = "", required this.userId});
+  const EventScreen(this.curLocation,
+      {super.key,
+      required this.isPastEvent,
+      this.trip = "",
+      required this.userId});
 
   final String curLocation;
   final bool isPastEvent;
@@ -28,6 +32,7 @@ class _EventScreenState extends State<EventScreen>
   int page = 0;
   bool isLoading = true;
   late EventCubit eventCubit;
+  late int deletedEventIndex;
 
   final scrollController = ScrollController();
 
@@ -38,7 +43,8 @@ class _EventScreenState extends State<EventScreen>
           if (!isLoading) {
             return;
           }
-          eventCubit.fetchEvents(++page, widget.curLocation, widget.isPastEvent, widget.trip, widget.userId);
+          eventCubit.fetchEvents(++page, widget.curLocation, widget.isPastEvent,
+              widget.trip, widget.userId);
         }
       }
     });
@@ -50,7 +56,8 @@ class _EventScreenState extends State<EventScreen>
     setupScrollController(context);
     tripList = [];
     eventCubit = BlocProvider.of<EventCubit>(context);
-    eventCubit.fetchEvents(page, widget.curLocation, widget.isPastEvent, widget.trip, widget.userId);
+    eventCubit.fetchEvents(page, widget.curLocation, widget.isPastEvent,
+        widget.trip, widget.userId);
   }
 
   @override
@@ -64,6 +71,21 @@ class _EventScreenState extends State<EventScreen>
           if (state.eventsModel.offset == 0) {
             isLoading = false;
           }
+        }
+
+        if (state is DeleteEventError) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.message),
+              duration: const Duration(seconds: 3),
+            ),
+          );
+        }
+
+        if (state is DeleteEventSuccess) {
+          setState(() {
+            tripList.removeAt(deletedEventIndex);
+          });
         }
       },
       builder: (context, state) {
@@ -89,7 +111,8 @@ class _EventScreenState extends State<EventScreen>
               page = 0;
               tripList = [];
               isLoading = true;
-              eventCubit.fetchEvents(page, widget.curLocation, widget.isPastEvent, widget.trip, widget.userId);
+              eventCubit.fetchEvents(page, widget.curLocation,
+                  widget.isPastEvent, widget.trip, widget.userId);
             },
             child: ListView.builder(
               physics: const AlwaysScrollableScrollPhysics(),
@@ -101,7 +124,12 @@ class _EventScreenState extends State<EventScreen>
                         tripEngagementRepo: locator<TripEngagementRepo>(),
                         networkInfo: locator()),
                     child: EventItemWidget(
-                      trip: tripList[index], isPastEvent: widget.isPastEvent
+                      trip: tripList[index],
+                      isPastEvent: widget.isPastEvent,
+                      onDeleteEvent: (tripId) {
+                        deletedEventIndex = index;
+                        eventCubit.deleteEvent(tripId);
+                      },
                     ),
                   );
                 } else {

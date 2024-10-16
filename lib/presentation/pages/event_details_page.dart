@@ -332,7 +332,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
                   ),
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     GestureDetector(
                       onTap: () async {
@@ -347,11 +347,11 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
                           );
                         });
                       },
-                      child: const FilledCardTextButton(
+                      child: FilledCardTextButton(
                         backgroundColor: Color(0xFF1D3075),
                         title: "Comments",
                         buttonHeight: 48,
-                        buttonWidth: 120,
+                        buttonWidth: null,
                         fontSize: 16,
                       ),
                     ),
@@ -367,11 +367,11 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
                           );
                         });
                       },
-                      child: const FilledCardTextButton(
+                      child: FilledCardTextButton(
                         backgroundColor: Color(0xFF1D3075),
                         title: "Likes",
                         buttonHeight: 48,
-                        buttonWidth: 120,
+                        buttonWidth: null,
                         fontSize: 16,
                       ),
                     ),
@@ -387,11 +387,11 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
                               );
                             });
                       },
-                      child: const FilledCardTextButton(
+                      child: FilledCardTextButton(
                         backgroundColor: Color(0xFF1D3075),
                         title: "Joiners",
                         buttonHeight: 48,
-                        buttonWidth: 120,
+                        buttonWidth: null,
                         fontSize: 16,
                       ),
                     )

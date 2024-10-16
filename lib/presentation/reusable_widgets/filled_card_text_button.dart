@@ -23,11 +23,14 @@ class FilledCardTextButton extends StatelessWidget {
       child: SizedBox(
         height: buttonHeight,
         width: buttonWidth,
-        child: Center(
-            child: Text(
-          title,
-          style: TextStyle(color: Colors.white, fontSize: fontSize),
-        )),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+              child: Text(
+            title,
+            style: TextStyle(color: Colors.white, fontSize: fontSize),
+          )),
+        ),
       ),
     );
   }

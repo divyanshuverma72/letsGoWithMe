@@ -160,6 +160,7 @@ class _UserCommentsListState extends State<UserCommentsList>
                                       focusNode: focusNode,
                                       controller: textEditingController,
                                       decoration: InputDecoration(
+                                        isDense: true,
                                         hintText: value,
                                       ),
                                     ),

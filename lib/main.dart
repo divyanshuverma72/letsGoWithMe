@@ -53,9 +53,12 @@ class MyApp extends StatelessWidget {
         BlocProvider<UserDetailsCubit>(
           create: (counterCubitContext) => UserDetailsCubit(userDetailsRepo: locator<UserDetailsRepo>(), networkInfo: locator()),
         ),
+        BlocProvider<UserDetailsCubit>(
+          create: (counterCubitContext) => UserDetailsCubit(userDetailsRepo: locator<UserDetailsRepo>(), networkInfo: locator()),
+        ),
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: "Let's go with me",
         home: isUserLoggedIn ? const UserDetailsPage() : const LoginPage(),
         onGenerateRoute: AppRouter().onGenerateRoute,
       ),
