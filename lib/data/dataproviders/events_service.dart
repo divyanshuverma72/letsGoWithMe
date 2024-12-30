@@ -31,6 +31,7 @@ class EventsServiceImpl extends EventsService {
           Uri.parse("$rootUrl/user/$userId/$trip/$page"),
           headers: <String, String>{
             'Content-Type': 'application/json',
+            'Authorization': 'Bearer ${UserPreferences.accessToken}',
             'Connection' : 'keep-alive'
           },
         );
@@ -39,6 +40,7 @@ class EventsServiceImpl extends EventsService {
           isPastEvent ? Uri.parse("$pastEvents${UserPreferences.userid}/$curLocation/$page") : Uri.parse("$upcomingEvents${UserPreferences.userid}/$curLocation/$page"),
           headers: <String, String>{
             'Content-Type': 'application/json',
+            'Authorization': 'Bearer ${UserPreferences.accessToken}',
             'Connection' : 'keep-alive'
           },
         );
@@ -64,6 +66,7 @@ class EventsServiceImpl extends EventsService {
         Uri.parse(deleteEventUrl),
         headers: <String, String>{
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${UserPreferences.accessToken}',
           'Connection': 'keep-alive'
         },
         body: jsonEncode(<String, dynamic>{

@@ -36,7 +36,7 @@ class _LikesWidgetState extends State<LikesWidget> {
                 child: CircleAvatar(
                   radius: 100.0,
                   backgroundImage:
-                  NetworkImage(widget.userAvatar),
+                  AssetImage(widget.userAvatar.replaceAll("/home/vassar-divyanshu/AndroidStudioProjects/Personal/letsgowithme/", "")),
                   backgroundColor: Colors.transparent,
                 ),
               ),

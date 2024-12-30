@@ -138,7 +138,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
                                 profilePicUrl = state.profilePicUrl;
                                 return ClipRRect(
                                     borderRadius: BorderRadius.circular(32.0),
-                                    child: Image.network(profilePicUrl));
+                                    child: Image.asset(profilePicUrl.replaceAll("/home/vassar-divyanshu/AndroidStudioProjects/Personal/letsgowithme/", "")));
                               }
                               return Stack(children: <Widget>[
                                 ClipRRect(

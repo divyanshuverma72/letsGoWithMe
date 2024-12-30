@@ -8,4 +8,5 @@ class UserPreferences {
   static String email = "email";
   static int dateOfBirth = 89898;
   static String gender = "gender";
+  static String accessToken = "access_token";
 }

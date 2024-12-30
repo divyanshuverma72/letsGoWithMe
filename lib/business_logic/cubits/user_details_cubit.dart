@@ -66,5 +66,6 @@ class UserDetailsCubit extends Cubit<UserDetailsState> {
     UserPreferences.lastName = (await SharedPreferenceUtil.instance.getStringPreferenceValue(SharedPreferenceUtil.instance.lastName))!;
     UserPreferences.gender = (await SharedPreferenceUtil.instance.getStringPreferenceValue(SharedPreferenceUtil.instance.gender))!;
     UserPreferences.mobileNo = (await SharedPreferenceUtil.instance.getIntPreferenceValue(SharedPreferenceUtil.instance.mobileNumber)).toString();
+    UserPreferences.accessToken = (await SharedPreferenceUtil.instance.getStringPreferenceValue(SharedPreferenceUtil.instance.accessToken))!;
   }
 }

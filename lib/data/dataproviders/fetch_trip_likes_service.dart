@@ -7,6 +7,7 @@ import '../../core/constants/api_constants.dart';
 import '../../core/error/exceptions.dart';
 import 'package:http/http.dart' as http;
 
+import '../../core/util/user_preferences.dart';
 import '../models/like_response_model.dart';
 
 abstract class FetchTripLikesService {
@@ -29,6 +30,7 @@ class FetchTripLikesServiceImpl extends FetchTripLikesService {
         Uri.parse("$userLikesUrl$tripId"),
         headers: <String, String>{
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${UserPreferences.accessToken}',
           'Connection' : 'keep-alive'
         },
       );

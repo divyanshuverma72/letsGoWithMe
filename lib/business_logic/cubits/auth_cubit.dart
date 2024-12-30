@@ -39,18 +39,20 @@ class AuthCubit extends Cubit<AuthState> {
       if (otpRequestResponseModel.userid != null) {
         SharedPreferenceUtil.instance.setStringPreferenceValue(SharedPreferenceUtil.instance.userId, otpRequestResponseModel.userid!);
       }
-      return RequestOtpSuccess();
+      return RequestOtpSuccess(otp: otpRequestResponseModel.otp.toString());
     }));
   }
 
-  Future<void> verifyLoginOtp(String otp) async {
+  Future<void> verifyLoginOtp(String mobileNo, String otp) async {
     emit(VerifyOtpInProgress());
 
-    final verifyOtpSuccess = await authRepo.verifyOtp(otp);
-    if (verifyOtpSuccess) {
-      emit(VerifyOtpSuccess());
-    } else {
-      emit(VerifyOtpFailure());
-    }
+    final verifyOtpSuccess = await authRepo.verifyOtp(mobileNo, otp);
+
+    emit(verifyOtpSuccess.fold((failure) {
+      return VerifyOtpFailure();
+    }, (otpVerificationResponse) {
+      SharedPreferenceUtil.instance.setStringPreferenceValue(SharedPreferenceUtil.instance.accessToken, otpVerificationResponse.data.first.accessToken);
+      return VerifyOtpSuccess();
+    }));
   }
 }

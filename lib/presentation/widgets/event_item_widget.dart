@@ -62,7 +62,7 @@ class _EventItemWidgetState extends State<EventItemWidget> {
             decoration: BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.fill,
-                image: NetworkImage(widget.trip.images[0]),
+                image: AssetImage(widget.trip.images[0].replaceAll("/home/vassar-divyanshu/AndroidStudioProjects/Personal/letsgowithme/", "")),
               ),
               color: Colors.white,
               borderRadius: const BorderRadius.all(
@@ -102,7 +102,7 @@ class _EventItemWidgetState extends State<EventItemWidget> {
                 radius: 40.0,
                 child: CircleAvatar(
                   radius: 100.0,
-                  backgroundImage: NetworkImage(widget.trip.user.image),
+                  backgroundImage: AssetImage(widget.trip.user.image.replaceAll("/home/vassar-divyanshu/AndroidStudioProjects/Personal/letsgowithme/", "")),
                   backgroundColor: Colors.transparent,
                 )),
           ),

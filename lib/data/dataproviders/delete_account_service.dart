@@ -7,8 +7,8 @@ import '../../core/constants/api_constants.dart';
 import '../../core/error/exceptions.dart';
 import 'package:http/http.dart' as http;
 
+import '../../core/util/user_preferences.dart';
 import '../models/delete_account_response_model.dart';
-import '../models/user_details_model.dart';
 
 abstract class DeleteAccountService {
   Future<DeleteAccountResponseModel> deleteUserAccount(String userId);
@@ -30,6 +30,7 @@ class DeleteAccountServiceImpl extends DeleteAccountService {
         Uri.parse(deleteAccountUrl),
         headers: <String, String>{
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${UserPreferences.accessToken}',
           'Connection': 'keep-alive'
         },
         body: jsonEncode(<String, dynamic>{

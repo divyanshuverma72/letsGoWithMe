@@ -69,7 +69,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
                   width: 48,
                   child: CircleAvatar(
                     radius: 100.0,
-                    backgroundImage: NetworkImage(widget.trip.user.image),
+                    backgroundImage: AssetImage(widget.trip.user.image.replaceAll("/home/vassar-divyanshu/AndroidStudioProjects/Personal/letsgowithme/", "")),
                     backgroundColor: Colors.transparent,
                   )
                 ),
@@ -118,7 +118,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
                             decoration: BoxDecoration(
                               image: DecorationImage(
                                 fit: BoxFit.fill,
-                                image: NetworkImage(widget.trip.images[0]),
+                                image: AssetImage(widget.trip.images[0].replaceAll("/home/vassar-divyanshu/AndroidStudioProjects/Personal/letsgowithme/", "")),
                               ),
                               color: Colors.white,
                               borderRadius: const BorderRadius.all(
@@ -331,71 +331,74 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
                     },
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    GestureDetector(
-                      onTap: () async {
-                        _controller =
-                            scaffoldKey.currentState!.showBottomSheet((context) {
-                          return BlocProvider(
-                            create: (userCommentsCubitContext) => UserCommentsCubit(
-                                userCommentsRepo: locator<UserCommentsRepo>(),
-                                networkInfo: locator()),
-                            child: UserCommentsList(
-                                _controller, widget.trip, widget.userId),
-                          );
-                        });
-                      },
-                      child: FilledCardTextButton(
-                        backgroundColor: Color(0xFF1D3075),
-                        title: "Comments",
-                        buttonHeight: 48,
-                        buttonWidth: null,
-                        fontSize: 16,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      GestureDetector(
+                        onTap: () async {
+                          _controller =
+                              scaffoldKey.currentState!.showBottomSheet((context) {
+                            return BlocProvider(
+                              create: (userCommentsCubitContext) => UserCommentsCubit(
+                                  userCommentsRepo: locator<UserCommentsRepo>(),
+                                  networkInfo: locator()),
+                              child: UserCommentsList(
+                                  _controller, widget.trip, widget.userId),
+                            );
+                          });
+                        },
+                        child: const FilledCardTextButton(
+                          backgroundColor: Color(0xFF1D3075),
+                          title: "Comments",
+                          buttonHeight: 48,
+                          buttonWidth: 110,
+                          fontSize: 16,
+                        ),
                       ),
-                    ),
-                    GestureDetector(
-                      onTap: () async {
-                        _controller =
-                            scaffoldKey.currentState!.showBottomSheet((context) {
-                          return BlocProvider(
-                            create: (userLikesCubitContext) => UserLikesCubit(
-                                userLikesRepo: locator<UserLikesRepo>(),
-                                networkInfo: locator()),
-                            child: UserLikesList(_controller, widget.trip),
-                          );
-                        });
-                      },
-                      child: FilledCardTextButton(
-                        backgroundColor: Color(0xFF1D3075),
-                        title: "Likes",
-                        buttonHeight: 48,
-                        buttonWidth: null,
-                        fontSize: 16,
+                      GestureDetector(
+                        onTap: () async {
+                          _controller =
+                              scaffoldKey.currentState!.showBottomSheet((context) {
+                            return BlocProvider(
+                              create: (userLikesCubitContext) => UserLikesCubit(
+                                  userLikesRepo: locator<UserLikesRepo>(),
+                                  networkInfo: locator()),
+                              child: UserLikesList(_controller, widget.trip),
+                            );
+                          });
+                        },
+                        child: const FilledCardTextButton(
+                          backgroundColor: Color(0xFF1D3075),
+                          title: "Likes",
+                          buttonHeight: 48,
+                          buttonWidth: 110,
+                          fontSize: 16,
+                        ),
                       ),
-                    ),
-                    GestureDetector(
-                      onTap: () async {
-                        _controller =
-                            scaffoldKey.currentState!.showBottomSheet((context) {
-                              return BlocProvider(
-                                create: (userLikesCubitContext) => TripJoinersCubit(
-                                    tripJoinersRepo: locator<TripJoinersRepo>(),
-                                    networkInfo: locator()),
-                                child: TripJoinersList(_controller, widget.trip),
-                              );
-                            });
-                      },
-                      child: FilledCardTextButton(
-                        backgroundColor: Color(0xFF1D3075),
-                        title: "Joiners",
-                        buttonHeight: 48,
-                        buttonWidth: null,
-                        fontSize: 16,
-                      ),
-                    )
-                  ],
+                      GestureDetector(
+                        onTap: () async {
+                          _controller =
+                              scaffoldKey.currentState!.showBottomSheet((context) {
+                                return BlocProvider(
+                                  create: (userLikesCubitContext) => TripJoinersCubit(
+                                      tripJoinersRepo: locator<TripJoinersRepo>(),
+                                      networkInfo: locator()),
+                                  child: TripJoinersList(_controller, widget.trip),
+                                );
+                              });
+                        },
+                        child: const FilledCardTextButton(
+                          backgroundColor: Color(0xFF1D3075),
+                          title: "Joiners",
+                          buttonHeight: 48,
+                          buttonWidth: 110,
+                          fontSize: 16,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ],
             ),

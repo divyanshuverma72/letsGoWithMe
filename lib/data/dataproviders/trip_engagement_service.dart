@@ -8,6 +8,7 @@ import '../../core/constants/api_constants.dart';
 import '../../core/error/exceptions.dart';
 import 'package:http/http.dart' as http;
 
+import '../../core/util/user_preferences.dart';
 import '../models/join_api_response_model.dart';
 
 abstract class TripEngagementService {
@@ -30,6 +31,7 @@ class TripEngagementServiceImpl extends TripEngagementService {
         Uri.parse(toggleLikesUrl),
         headers: <String, String>{
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${UserPreferences.accessToken}',
           'Connection': 'keep-alive'
         },
         body: jsonEncode(<String, dynamic>{
@@ -58,6 +60,7 @@ class TripEngagementServiceImpl extends TripEngagementService {
         Uri.parse(toggleLikesUrl),
         headers: <String, String>{
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${UserPreferences.accessToken}',
           'Connection': 'keep-alive'
         },
         body: jsonEncode(<String, dynamic>{

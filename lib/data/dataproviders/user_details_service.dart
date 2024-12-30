@@ -7,6 +7,7 @@ import '../../core/constants/api_constants.dart';
 import '../../core/error/exceptions.dart';
 import 'package:http/http.dart' as http;
 
+import '../../core/util/user_preferences.dart';
 import '../models/user_details_model.dart';
 
 abstract class UserDetailsService {
@@ -28,6 +29,7 @@ class UserDetailServiceImpl extends UserDetailsService {
         Uri.parse("$userDetailsUrl$userId"),
         headers: <String, String>{
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${UserPreferences.accessToken}',
           'Connection': 'keep-alive'
         },
       );

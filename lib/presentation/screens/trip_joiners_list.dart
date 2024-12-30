@@ -75,9 +75,9 @@ class _TripJoinersListState extends State<TripJoinersList>
           },
           child: DraggableScrollableSheet(
             expand: false,
-            initialChildSize: 1,
+            initialChildSize: 0.7,
             minChildSize: 0.5,
-            maxChildSize: 1,
+            maxChildSize: 0.7,
             builder:
                 (BuildContext context, ScrollController scrollController) {
               scrollControllerListView = scrollController;

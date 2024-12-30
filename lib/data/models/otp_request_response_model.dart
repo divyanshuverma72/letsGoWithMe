@@ -9,7 +9,7 @@ class OtpRequestResponseModel extends Equatable {
 
   factory OtpRequestResponseModel.fromJson(Map<String, dynamic> json) {
     return OtpRequestResponseModel(
-        otp: json["data"]["otp"], isNewUser: !json["data"]["is_user_exist"], userid: json["data"]["user_id"]);
+        otp: json["data"]["otp"], isNewUser: !json["data"]["is_user_exist"], userid: json["data"]["user"]["uuid"]);
   }
 
   @override

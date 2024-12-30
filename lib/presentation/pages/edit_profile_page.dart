@@ -137,7 +137,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 return CircleAvatar(
                                   key: UniqueKey(),
                                   radius: 32.0,
-                                  backgroundImage: NetworkImage(value),
+                                  backgroundImage: AssetImage(value.replaceAll("/home/vassar-divyanshu/AndroidStudioProjects/Personal/letsgowithme/", "")),
                                   backgroundColor: Colors.transparent,
                                 );
                               },
@@ -201,7 +201,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           } else if (val.length <= 3) {
                             return "Username length should be greater than 3";
                           } else if (state is UserNameVerificationSuccess) {
-                            return !state.usernameExists
+                            return state.usernameExists
                                 ? "${state.username} not available"
                                 : null;
                           } else if (state is UserNameVerificationInProgress) {

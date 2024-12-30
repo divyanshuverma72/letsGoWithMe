@@ -108,6 +108,14 @@ class _LoginPageState extends State<LoginPage> {
                 },
                 builder: (BuildContext context, AuthState state) {
                   if (state is RequestOtpSuccess) {
+                    WidgetsBinding.instance.addPostFrameCallback((_) async {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text("Your login otp is: ${state.otp}"),
+                          duration: const Duration(seconds: 3),
+                        ),
+                      );
+                    });
                     return verifyOtpWidget(context, state);
                   }
                   return requestOtpWidget(context, state);
@@ -213,7 +221,7 @@ class _LoginPageState extends State<LoginPage> {
             //runs when every text-field is filled
             onSubmit: (String verificationCode) async {
               _otpStr = verificationCode;
-              await context.read<AuthCubit>().verifyLoginOtp(_otpStr);
+              await context.read<AuthCubit>().verifyLoginOtp(_mobileNumber, _otpStr);
             }, // end onSubmit
           ),
         ),
@@ -224,7 +232,7 @@ class _LoginPageState extends State<LoginPage> {
               )
             : GestureDetector(
                 onTap: () async {
-                  await context.read<AuthCubit>().verifyLoginOtp(_otpStr);
+                  await context.read<AuthCubit>().verifyLoginOtp(_mobileNumber, _otpStr);
                 },
                 child: const Padding(
                   padding: EdgeInsets.only(left: 32, right: 32, top: 24),

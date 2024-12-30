@@ -6,6 +6,7 @@ import 'package:logger/logger.dart';
 
 import '../../core/constants/api_constants.dart';
 import '../../core/error/exceptions.dart';
+import '../../core/util/user_preferences.dart';
 import '../models/comments_response_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -30,6 +31,7 @@ class FetchTripCommentsServiceImpl extends FetchTripCommentsService {
         Uri.parse("$userCommentsResponseUrl$tripId"),
         headers: <String, String>{
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${UserPreferences.accessToken}',
           'Connection' : 'keep-alive'
         },
       );
@@ -53,6 +55,7 @@ class FetchTripCommentsServiceImpl extends FetchTripCommentsService {
         Uri.parse("$userCommentsRepliesResponseUrl$parentId"),
         headers: <String, String>{
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${UserPreferences.accessToken}',
           'Connection' : 'keep-alive'
         },
       );

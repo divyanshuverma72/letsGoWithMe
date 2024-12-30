@@ -135,7 +135,7 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
                             }
                             return CircleAvatar(
                               radius: 32.0,
-                              backgroundImage: profilePicUrl.isEmpty ? Image.asset("assets/images/profile_icon.png").image : NetworkImage(profilePicUrl),
+                              backgroundImage: profilePicUrl.isEmpty ? Image.asset("assets/images/profile_icon.png").image : AssetImage(profilePicUrl.replaceAll("/home/vassar-divyanshu/AndroidStudioProjects/Personal/letsgowithme/", "")),
                               backgroundColor: Colors.transparent,
                             );
                           },
@@ -208,7 +208,7 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
                           } else if (val.length <= 3) {
                             return "Username length should be greater than 3";
                           } else if (state is UserNameVerificationSuccess) {
-                            return !state.usernameExists
+                            return state.usernameExists
                                 ? "${state.username} not available"
                                 : null;
                           } else if (state is UserNameVerificationInProgress) {

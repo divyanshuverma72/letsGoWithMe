@@ -1,15 +1,16 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:lets_go_with_me/core/error/exceptions.dart';
 import 'package:lets_go_with_me/data/models/create_event_model.dart';
-import 'package:lets_go_with_me/data/models/profile_pic_upload_response_model.dart';
 import 'package:logger/logger.dart';
 
 import '../../core/constants/api_constants.dart';
 import 'package:http/http.dart' as http;
 
+import '../../core/util/user_preferences.dart';
 import '../models/EventProfilePicUploadResponseModel.dart';
 import '../models/create_event_response_model.dart';
 
@@ -33,7 +34,7 @@ class CreateEventServiceImpl extends CreateEventService {
       request.fields["upload_type"]="trip";
       request.files.add(http.MultipartFile.fromBytes(
           "file", image.readAsBytesSync(),
-          filename: "event_profile_pic.png"));
+          filename: "${UserPreferences.userid}_${Random().nextInt(10000)}event_profile_pic.png"));
       res = await request.send();
     } catch (e) {
       throw UploadProfilePicException();
@@ -54,6 +55,7 @@ class CreateEventServiceImpl extends CreateEventService {
         Uri.parse(createEvent),
         headers: <String, String>{
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${UserPreferences.accessToken}',
           'Connection' : 'keep-alive'
         },
         body: jsonEncode(<String, dynamic>{

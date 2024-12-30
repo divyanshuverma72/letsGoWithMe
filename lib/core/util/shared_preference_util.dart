@@ -20,6 +20,7 @@ class SharedPreferenceUtil {
   String email = "email";
   String dateOfBirth = "dob";
   String gender = "gender";
+  String accessToken = "accessToken";
 
   Future<bool> getBooleanPreferences(String key) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();

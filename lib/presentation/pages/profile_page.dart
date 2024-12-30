@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lets_go_with_me/presentation/pages/settings_page.dart';
@@ -28,6 +31,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -67,7 +71,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     width: 80,
                     child: CircleAvatar(
                       radius: 100.0,
-                      backgroundImage: NetworkImage(widget.profilePicUrl ?? UserPreferences.profileImage),
+                      backgroundImage: AssetImage(widget.profilePicUrl?.replaceAll("/home/vassar-divyanshu/AndroidStudioProjects/Personal/letsgowithme/", "") ?? UserPreferences.profileImage.replaceAll("/home/vassar-divyanshu/AndroidStudioProjects/Personal/letsgowithme/", "")),
                       backgroundColor: Colors.transparent,
                     )
                   ),
@@ -95,7 +99,10 @@ class _ProfilePageState extends State<ProfilePage> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          const Icon(Icons.phone, size: 15,),
+                          const Padding(
+                            padding: EdgeInsets.only(top: 8.0),
+                            child: Icon(Icons.phone, size: 15,),
+                          ),
                           const SizedBox(width: 9),
                           Padding(
                             padding: const EdgeInsets.only(top: 10.0),

@@ -146,7 +146,7 @@ class _UserCommentsListState extends State<UserCommentsList>
                                   child: CircleAvatar(
                                     radius: 100.0,
                                     backgroundImage:
-                                    NetworkImage(UserPreferences.profileImage),
+                                    AssetImage(UserPreferences.profileImage.replaceAll("/home/vassar-divyanshu/AndroidStudioProjects/Personal/letsgowithme/", "")),
                                     backgroundColor: Colors.transparent,
                                   )),
                             ),

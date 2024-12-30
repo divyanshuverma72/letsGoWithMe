@@ -105,9 +105,7 @@ class _CommentsWidgetState extends State<CommentsWidget>
                   child: CircleAvatar(
                     radius: 18,
                     backgroundColor: Colors.grey,
-                    backgroundImage: CachedNetworkImageProvider(
-                      data.avatar!,
-                    ),
+                    backgroundImage: AssetImage(data.avatar!.replaceAll("/home/vassar-divyanshu/AndroidStudioProjects/Personal/letsgowithme/", "")),
                   ),
                 ),
               ),
@@ -116,7 +114,7 @@ class _CommentsWidgetState extends State<CommentsWidget>
                 child: CircleAvatar(
                   radius: 12,
                   backgroundColor: Colors.grey,
-                  backgroundImage: CachedNetworkImageProvider(data.avatar!),
+                  backgroundImage: AssetImage(data.avatar!.replaceAll("/home/vassar-divyanshu/AndroidStudioProjects/Personal/letsgowithme/", "")),
                 ),
               ),
               contentChild: (context, data) {

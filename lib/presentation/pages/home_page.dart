@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage> {
                       child: CircleAvatar(
                         radius: 100.0,
                         backgroundImage:
-                            NetworkImage(UserPreferences.profileImage),
+                        AssetImage(UserPreferences.profileImage.replaceAll("/home/vassar-divyanshu/AndroidStudioProjects/Personal/letsgowithme/", "")),
                         backgroundColor: Colors.transparent,
                       )),
                 ),
@@ -145,6 +145,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
+          foregroundColor: Colors.white,
           backgroundColor: const Color(0xFF1D3075),
           tooltip: 'Create a new event',
           onPressed: () {

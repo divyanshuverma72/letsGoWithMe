@@ -41,7 +41,7 @@ class ProfileServiceImpl extends ProfileService {
       request.fields["upload_type"]="profile";
       request.files.add(http.MultipartFile.fromBytes(
           "file", image.readAsBytesSync(),
-          filename: "user_profile_pic.png"));
+          filename: "${UserPreferences.userid}user_profile_pic.png"));
       res = await request.send();
     } catch (e) {
       throw UploadProfilePicException();
@@ -64,6 +64,7 @@ class ProfileServiceImpl extends ProfileService {
         Uri.parse(userCreateProfile),
         headers: <String, String>{
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${UserPreferences.accessToken}',
           'Connection': 'keep-alive'
         },
         body: jsonEncode(<String, dynamic>{
@@ -99,6 +100,7 @@ class ProfileServiceImpl extends ProfileService {
         Uri.parse("$usernameVerificationUrl$username"),
         headers: <String, String>{
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${UserPreferences.accessToken}',
           'Connection': 'keep-alive'
         },
       );
@@ -118,10 +120,10 @@ class ProfileServiceImpl extends ProfileService {
   Future<EditProfilePicUploadResponseModel> uploadEditedProfilePic(File image) async {
     http.StreamedResponse res;
     try {
-      var request = http.MultipartRequest("POST", Uri.parse("$rootUrl/user/${UserPreferences.userid}/edit/thumbnail"));
+      var request = http.MultipartRequest("POST", Uri.parse("$rootUrl/user/update-thumbnail/${UserPreferences.userid}"));
       request.files.add(http.MultipartFile.fromBytes(
           "file", image.readAsBytesSync(),
-          filename: "user_profile_pic.png"));
+          filename: "${UserPreferences.userid}user_profile_pic.png"));
       res = await request.send();
     } catch (e) {
       throw EditProfileImageException();
@@ -141,9 +143,10 @@ class ProfileServiceImpl extends ProfileService {
     late final http.Response response;
     try {
       response = await httpClient.post(
-        Uri.parse("$userDetailsUrl${UserPreferences.userid}/edit"),
+        Uri.parse("$updateUserProfile${UserPreferences.userid}"),
         headers: <String, String>{
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${UserPreferences.accessToken}',
           'Connection': 'keep-alive'
         },
         body: jsonEncode(<String, dynamic>{

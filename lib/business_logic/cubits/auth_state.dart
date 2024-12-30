@@ -13,7 +13,9 @@ class RequestOtpInProgress extends AuthState {
 }
 
 class RequestOtpSuccess extends AuthState {
+  final String otp;
 
+  RequestOtpSuccess({required this.otp}) :super([otp]);
 }
 
 class VerifyOtpInProgress extends AuthState {

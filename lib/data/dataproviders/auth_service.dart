@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:lets_go_with_me/core/error/exceptions.dart';
-import 'package:lets_go_with_me/core/util/shared_preference_util.dart';
-import 'package:lets_go_with_me/data/models/user_details_model.dart';
+import 'package:lets_go_with_me/core/util/user_preferences.dart';
+import 'package:lets_go_with_me/data/models/otp_verification_response.dart';
 import 'package:logger/logger.dart';
 
 import '../../core/constants/api_constants.dart';
@@ -12,7 +12,7 @@ import 'package:http/http.dart' as http;
 
 abstract class AuthService {
   Future<OtpRequestResponseModel> requestOtp(String mobileNo);
-  Future<bool> verifyOtp(String otp);
+  Future<OtpVerificationResponse> verifyOtp(String mobileNo, String otp);
 }
 
 class OtpServiceImpl extends AuthService {
@@ -25,8 +25,13 @@ class OtpServiceImpl extends AuthService {
   Future<OtpRequestResponseModel> requestOtp(String mobileNo) async {
     late final http.Response response;
     try {
+      // Query parameters
+      final Map<String, String> queryParameters = {
+        'mobile_number': mobileNo,
+      };
+
       response = await httpClient.get(
-        Uri.parse("$requestOtpUrl$mobileNo"),
+          Uri.parse(requestOtpUrl).replace(queryParameters: queryParameters),
         headers: <String, String>{
           'Content-Type': 'application/json',
           'Connection': 'keep-alive'
@@ -45,9 +50,30 @@ class OtpServiceImpl extends AuthService {
   }
 
   @override
-  Future<bool> verifyOtp(String otp) async {
-    final loginOtp = await SharedPreferenceUtil.instance
-        .getStringPreferenceValue(SharedPreferenceUtil.instance.loginOtp);
-    return loginOtp == otp;
+  Future<OtpVerificationResponse> verifyOtp(String mobileNo, String otp) async {
+    late final http.Response response;
+    try {
+      final Map<String, String> queryParameters = {
+        'mobile_number': mobileNo,
+        'otp': otp
+      };
+      response = await httpClient.get(
+        Uri.parse(verifyOtpUrl).replace(queryParameters: queryParameters),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${UserPreferences.accessToken}',
+          'Connection': 'keep-alive'
+        },
+      );
+    } catch (e) {
+      Logger().e("$tag VerifyOtpApiException is $e");
+      throw VerifyOtpApiException();
+    }
+
+    if (response.statusCode == 200) {
+      return OtpVerificationResponse.fromJson(json.decode(response.body));
+    } else {
+      throw VerifyOtpApiException();
+    }
   }
 }
