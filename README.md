@@ -24,7 +24,10 @@ Why Choose Let’s Go With Me?
 
 Pack your bags, find your tribe, and set off on your next big adventure with Let’s Go With Me—because the best memories are made when we travel together!
 
-## Demo gif
-![](https://github.com/divyanshuverma72/letsGoWithMe/blob/master/lets_go_with_me_part_one.gif)
+## Demo GIF
 
-![](https://github.com/divyanshuverma72/letsGoWithMe/blob/master/lets_go_with_me_part_two.gif)
+<div align="center">
+  <img src="https://github.com/divyanshuverma72/letsGoWithMe/blob/master/lets_go_with_me_part_one.gif" width="45%" height="800px" />
+  <img src="https://github.com/divyanshuverma72/letsGoWithMe/blob/master/lets_go_with_me_part_two.gif" width="45%" height="800px" />
+</div>
+
